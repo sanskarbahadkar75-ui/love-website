@@ -14,7 +14,6 @@ text-align:center;
 background:linear-gradient(135deg,#ff4b6e,#ff9a9e);
 }
 
-/* Screens */
 .screen{
 height:100vh;
 display:flex;
@@ -25,7 +24,6 @@ gap:20px;
 padding:20px;
 }
 
-/* Card */
 .card{
 background:rgba(255,255,255,0.12);
 padding:30px;
@@ -34,7 +32,6 @@ max-width:750px;
 width:100%;
 }
 
-/* Button */
 .btn{
 padding:15px 35px;
 font-size:20px;
@@ -46,7 +43,6 @@ background:white;
 color:#ff4b6e;
 }
 
-/* Glow */
 .glow{
 animation:glow 2s infinite alternate;
 }
@@ -55,44 +51,31 @@ from{text-shadow:0 0 5px pink;}
 to{text-shadow:0 0 20px white;}
 }
 
-/* Balloons */
-.balloon{
-font-size:50px;
-cursor:pointer;
-margin:5px;
+.balloon{font-size:50px;cursor:pointer;margin:5px;}
+
+.slider{
+width:250px;
 }
 
-/* Hearts */
-.heart{
-font-size:40px;
-position:absolute;
-cursor:pointer;
+.target{
+width:60px;
+height:6px;
+background:white;
+margin:5px auto;
+border-radius:5px;
 }
 
-/* Main */
-#main{
-display:none;
-padding:30px;
-}
-
-/* Gallery */
-.gallery{
-display:flex;
-gap:10px;
-overflow-x:auto;
-}
-.gallery img{
-width:180px;
-border-radius:15px;
-}
-
-/* Letter */
 .letter{
 text-align:left;
 line-height:1.7;
 font-size:20px;
 white-space:pre-line;
 }
+
+#main{display:none;padding:30px;}
+
+.gallery{display:flex;gap:10px;overflow-x:auto;}
+.gallery img{width:180px;border-radius:15px;}
 
 </style>
 </head>
@@ -140,14 +123,18 @@ white-space:pre-line;
 
 </div>
 
-<!-- HEART GAME -->
-<div id="heartPage" class="screen" style="display:none;">
+<!-- SLIDER GAME -->
+<div id="sliderPage" class="screen" style="display:none;">
 
-<h1>💖 Catch The Heart</h1>
+<h1>💘 Balance My Heart</h1>
+<p>Bring ❤️ to the center</p>
 
-<div id="heart" class="heart">❤️</div>
+<div class="target"></div>
 
-<p id="heartMsg"></p>
+<input type="range" min="0" max="100" value="0"
+class="slider" id="loveSlider">
+
+<p id="sliderMsg"></p>
 
 </div>
 
@@ -219,9 +206,7 @@ white-space:pre-line;
 <source src="video1.mp4">
 </video>
 
-<footer>
-I Love You Forever 😘❤️
-</footer>
+<footer>I Love You Forever 😘❤️</footer>
 
 </div>
 
@@ -235,12 +220,10 @@ if(pass.value==="love123"){
 hideAll();
 startPage.style.display="flex";
 
-}else{
-passMsg.innerHTML="❌ Wrong Password";
-}
+}else passMsg.innerHTML="❌ Wrong Password";
 }
 
-/* BALLOON GAME */
+/* BALLOON */
 let popped=0;
 
 function goBalloon(){
@@ -264,9 +247,8 @@ this.remove();
 popped++;
 
 if(popped>=5){
-
 balloonMsg.innerHTML="😍 You Won!";
-setTimeout(goHeart,1200);
+setTimeout(goSlider,1200);
 }
 };
 
@@ -274,46 +256,26 @@ balloons.appendChild(b);
 }
 }
 
-/* HEART GAME */
-let heartInterval;
-
-function goHeart(){
+/* SLIDER GAME */
+function goSlider(){
 
 hideAll();
-heartPage.style.display="flex";
+sliderPage.style.display="flex";
 
-spawnHeart();
+loveSlider.value=0;
+sliderMsg.innerHTML="";
 }
 
-function spawnHeart(){
+loveSlider.oninput=function(){
 
-const h=document.getElementById("heart");
+const v=parseInt(this.value);
 
-clearInterval(heartInterval);
+if(v>45 && v<55){
 
-moveHeart();
-
-h.onclick=function(){
-
-heartMsg.innerHTML="💖 Caught!";
-clearInterval(heartInterval);
-
+sliderMsg.innerHTML="💖 Perfect Balance!";
 setTimeout(goQuiz,1000);
+}
 };
-
-heartInterval=setInterval(moveHeart,700);
-}
-
-function moveHeart(){
-
-const h=document.getElementById("heart");
-
-const x=Math.random()*70+5;
-const y=Math.random()*60+5;
-
-h.style.left=x+"%";
-h.style.top=y+"%";
-}
 
 /* QUIZ */
 function goQuiz(){
@@ -334,7 +296,7 @@ function quizWrong(){
 quizMsg.innerHTML="😅 Try Again!";
 }
 
-/* RING GAME */
+/* RING */
 const ringBox=2;
 
 function goRing(){
@@ -349,13 +311,9 @@ function findRing(n){
 if(n===ringBox){
 
 ringMsg.innerHTML="💍 Yeahhh! We Will Get Married 😍❤️";
-
 setTimeout(goLetter,1500);
 
-}else{
-
-ringMsg.innerHTML="😅 Wrong Box! Try Again";
-}
+}else ringMsg.innerHTML="😅 Wrong Box!";
 }
 
 /* LETTER */
@@ -365,7 +323,6 @@ hideAll();
 letterPage.style.display="flex";
 
 music.play();
-
 startLetterTyping();
 }
 
@@ -378,7 +335,7 @@ main.style.display="block";
 typeWriter();
 }
 
-/* HIDE ALL */
+/* HIDE */
 function hideAll(){
 
 document.querySelectorAll(".screen,#main").forEach(el=>{
@@ -412,17 +369,10 @@ my biggest blessing ❤️
 With you, every little moment feels special.
 Your voice makes my heart calm,
 your laughter makes my world bright.
-I never knew love could be this pure.
 
-I promise to stand with you in every situation,
-to protect you, respect you,
-and love you more every day 💍
+I promise to love you forever 💍
+Always and forever ❤️
 
-No matter where life takes us,
-I will always choose you,
-again and again.
-
-Forever Yours,
 Sanskar ❤️
 `;
 
@@ -432,7 +382,6 @@ function startLetterTyping(){
 
 letterIndex=0;
 letterText.innerHTML="";
-
 typeLetter();
 }
 
@@ -441,7 +390,6 @@ function typeLetter(){
 if(letterIndex < letterMessage.length){
 
 letterText.innerHTML += letterMessage.charAt(letterIndex);
-
 letterIndex++;
 
 setTimeout(typeLetter,40);
