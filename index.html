@@ -60,11 +60,7 @@ to{text-shadow:0 0 20px white;}
 }
 
 /* Balloon */
-.balloon{
-font-size:50px;
-cursor:pointer;
-margin:5px;
-}
+.balloon{font-size:50px;cursor:pointer;margin:5px;}
 
 /* Slider */
 .slider{width:250px;}
@@ -95,7 +91,7 @@ position:relative;
 z-index:2;
 }
 
-/* PHOTO RAIN */
+/* PHOTO RAIN (hidden first) */
 #photoRain{
 position:fixed;
 top:0;
@@ -105,27 +101,27 @@ height:100%;
 pointer-events:none;
 z-index:1;
 overflow:hidden;
-perspective:800px;
+perspective:900px;
+display:none; /* hidden at start */
 }
 
 .rainPhoto{
 position:absolute;
-width:90px;
-border-radius:12px;
-opacity:0.9;
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
+border-radius:15px;
+opacity:0.95;
+box-shadow:0 12px 30px rgba(0,0,0,0.4);
 animation:fall linear infinite;
 transform-style:preserve-3d;
 }
 
 @keyframes fall{
 0%{
-transform:translateY(-120px) rotateY(0deg) translateZ(0px);
+transform:translateY(-150px) rotateY(0deg) translateZ(0);
 opacity:0;
 }
 10%{opacity:1;}
 100%{
-transform:translateY(110vh) rotateY(360deg) translateZ(-200px);
+transform:translateY(110vh) rotateY(360deg) translateZ(-250px);
 opacity:0;
 }
 }
@@ -246,15 +242,15 @@ class="slider" id="loveSlider">
 
 <p id="typing"></p>
 
-<footer>
-I Love You Forever 😘❤️
-</footer>
+<footer>I Love You Forever 😘❤️</footer>
 
 </div>
 
 <script>
 
 /* PHOTO RAIN */
+
+let rainInterval=null;
 
 const photos=[
 "photo1.jpg",
@@ -263,6 +259,17 @@ const photos=[
 "photo4.jpg",
 "photo5.jpg"
 ];
+
+function startRain(){
+
+const rain=document.getElementById("photoRain");
+
+rain.style.display="block";
+
+if(rainInterval) return;
+
+rainInterval=setInterval(createRain,600);
+}
 
 function createRain(){
 
@@ -276,16 +283,15 @@ img.src=photos[Math.floor(Math.random()*photos.length)];
 
 img.style.left=Math.random()*100+"vw";
 
-img.style.animationDuration=5+Math.random()*6+"s";
+/* Bigger size */
+img.style.width=120+Math.random()*60+"px";
 
-img.style.width=70+Math.random()*60+"px";
+img.style.animationDuration=6+Math.random()*5+"s";
 
 rain.appendChild(img);
 
-setTimeout(()=>img.remove(),12000);
+setTimeout(()=>img.remove(),13000);
 }
-
-setInterval(createRain,700);
 
 /* PASSWORD */
 function checkPass(){
@@ -406,6 +412,9 @@ function goMain(){
 
 hideAll();
 main.style.display="block";
+
+/* START RAIN ONLY HERE */
+startRain();
 
 typeWriter();
 }
