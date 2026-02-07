@@ -31,6 +31,7 @@ background:rgba(255,255,255,0.12);
 padding:30px;
 border-radius:25px;
 max-width:750px;
+width:100%;
 }
 
 /* Button */
@@ -58,6 +59,7 @@ to{text-shadow:0 0 20px white;}
 .balloon{
 font-size:50px;
 cursor:pointer;
+margin:5px;
 }
 
 /* Hearts */
@@ -238,7 +240,7 @@ passMsg.innerHTML="❌ Wrong Password";
 }
 }
 
-/* BALLOON */
+/* BALLOON GAME */
 let popped=0;
 
 function goBalloon(){
@@ -248,18 +250,21 @@ balloonPage.style.display="flex";
 
 balloons.innerHTML="";
 popped=0;
+balloonMsg.innerHTML="";
 
 for(let i=0;i<7;i++){
 
 const b=document.createElement("span");
 b.className="balloon";
 b.innerHTML="🎈";
+
 b.onclick=function(){
 
 this.remove();
 popped++;
 
 if(popped>=5){
+
 balloonMsg.innerHTML="😍 You Won!";
 setTimeout(goHeart,1200);
 }
@@ -269,36 +274,53 @@ balloons.appendChild(b);
 }
 }
 
-/* HEART */
+/* HEART GAME */
+let heartInterval;
+
 function goHeart(){
 
 hideAll();
 heartPage.style.display="flex";
 
+spawnHeart();
+}
+
+function spawnHeart(){
+
+const h=document.getElementById("heart");
+
+clearInterval(heartInterval);
+
 moveHeart();
+
+h.onclick=function(){
+
+heartMsg.innerHTML="💖 Caught!";
+clearInterval(heartInterval);
+
+setTimeout(goQuiz,1000);
+};
+
+heartInterval=setInterval(moveHeart,700);
 }
 
 function moveHeart(){
 
 const h=document.getElementById("heart");
 
-h.style.left=Math.random()*80+"%";
-h.style.top=Math.random()*70+"%";
+const x=Math.random()*70+5;
+const y=Math.random()*60+5;
+
+h.style.left=x+"%";
+h.style.top=y+"%";
 }
-
-heart.onclick=function(){
-
-heartMsg.innerHTML="💖 Caught!";
-setTimeout(goQuiz,1000);
-};
-
-setInterval(moveHeart,1000);
 
 /* QUIZ */
 function goQuiz(){
 
 hideAll();
 quizPage.style.display="flex";
+quizMsg.innerHTML="";
 }
 
 function quizRight(){
@@ -312,24 +334,27 @@ function quizWrong(){
 quizMsg.innerHTML="😅 Try Again!";
 }
 
-/* RING */
+/* RING GAME */
 const ringBox=2;
 
 function goRing(){
 
 hideAll();
 ringPage.style.display="flex";
+ringMsg.innerHTML="";
 }
 
 function findRing(n){
 
 if(n===ringBox){
 
-ringMsg.innerHTML="💍 Found It!";
-setTimeout(goLetter,1200);
+ringMsg.innerHTML="💍 Yeahhh! We Will Get Married 😍❤️";
+
+setTimeout(goLetter,1500);
 
 }else{
-ringMsg.innerHTML="😅 Wrong Box!";
+
+ringMsg.innerHTML="😅 Wrong Box! Try Again";
 }
 }
 
@@ -353,7 +378,7 @@ main.style.display="block";
 typeWriter();
 }
 
-/* HIDE */
+/* HIDE ALL */
 function hideAll(){
 
 document.querySelectorAll(".screen,#main").forEach(el=>{
@@ -361,7 +386,7 @@ el.style.display="none";
 });
 }
 
-/* TYPE MAIN */
+/* MAIN TYPING */
 const text=`My Chikudiii 💕
 You are my forever ❤️`;
 
@@ -378,7 +403,6 @@ setTimeout(typeWriter,70);
 }
 
 /* LETTER TYPING */
-
 const letterMessage = `
 From the first day you came into my life,
 everything changed beautifully.
