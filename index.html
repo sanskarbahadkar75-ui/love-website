@@ -50,7 +50,6 @@ background:white;
 color:#ff4b6e;
 }
 
-/* Glow */
 .glow{
 animation:glow 2s infinite alternate;
 }
@@ -79,7 +78,6 @@ line-height:1.7;
 font-size:20px;
 white-space:pre-line;
 }
-
 .letter h2{margin:0 0 8px 0;}
 .letter p{margin:4px 0;}
 
@@ -91,7 +89,7 @@ position:relative;
 z-index:2;
 }
 
-/* PHOTO RAIN (hidden first) */
+/* PHOTO RAIN */
 #photoRain{
 position:fixed;
 top:0;
@@ -102,7 +100,7 @@ pointer-events:none;
 z-index:1;
 overflow:hidden;
 perspective:900px;
-display:none; /* hidden at start */
+display:none;
 }
 
 .rainPhoto{
@@ -111,17 +109,16 @@ border-radius:15px;
 opacity:0.95;
 box-shadow:0 12px 30px rgba(0,0,0,0.4);
 animation:fall linear infinite;
-transform-style:preserve-3d;
 }
 
 @keyframes fall{
 0%{
-transform:translateY(-150px) rotateY(0deg) translateZ(0);
+transform:translateY(-150px) rotateY(0deg);
 opacity:0;
 }
 10%{opacity:1;}
 100%{
-transform:translateY(110vh) rotateY(360deg) translateZ(-250px);
+transform:translateY(110vh) rotateY(360deg);
 opacity:0;
 }
 }
@@ -242,6 +239,31 @@ class="slider" id="loveSlider">
 
 <p id="typing"></p>
 
+<div class="card" style="margin-top:20px;font-size:18px;line-height:1.7;">
+
+My Pyari Chikudiii ❤️,
+
+Tame mari smile chho,
+mari khushi chho,
+ane mari duniya chho.
+
+Jare pan hu tane jovu,
+maru dil shant thai jaye chhe.
+Tame mara jivan no
+sab thi sundar hissa chho.
+
+Hu hamesha tane prem karto rahish,
+taro sath kyarey nahi chhodish,
+har situation ma tari sathe rahish.
+
+Tame mari forever chho,
+mari soulmate chho,
+ane mari badhi jindagi chho 💍💖
+
+– Taro Sanskar 😘
+
+</div>
+
 <footer>I Love You Forever 😘❤️</footer>
 
 </div>
@@ -249,7 +271,6 @@ class="slider" id="loveSlider">
 <script>
 
 /* PHOTO RAIN */
-
 let rainInterval=null;
 
 const photos=[
@@ -283,7 +304,6 @@ img.src=photos[Math.floor(Math.random()*photos.length)];
 
 img.style.left=Math.random()*100+"vw";
 
-/* Bigger size */
 img.style.width=120+Math.random()*60+"px";
 
 img.style.animationDuration=6+Math.random()*5+"s";
@@ -413,9 +433,7 @@ function goMain(){
 hideAll();
 main.style.display="block";
 
-/* START RAIN ONLY HERE */
 startRain();
-
 typeWriter();
 }
 
@@ -445,19 +463,26 @@ setTimeout(typeWriter,70);
 
 /* LETTER TYPING */
 const letterMessage = `
-From the first day you came into my life,
-everything changed beautifully.
-You became my smile, my peace,
-my biggest blessing ❤️
+My Pyari Chikudiii ❤️,
 
-With you, every little moment feels special.
-Your voice makes my heart calm,
-your laughter makes my world bright.
+Tame mari smile chho,
+mari khushi chho,
+ane mari duniya chho.
 
-I promise to love you forever 💍
-Always and forever ❤️
+Jare pan hu tane jovu,
+maru dil shant thai jaye chhe.
+Tame mara jivan no
+sab thi sundar hissa chho.
 
-Sanskar ❤️
+Hu hamesha tane prem karto rahish,
+taro sath kyarey nahi chhodish,
+har situation ma tari sathe rahish.
+
+Tame mari forever chho,
+mari soulmate chho,
+ane mari badhi jindagi chho 💍💖
+
+– Taro Sanskar 😘
 `;
 
 let letterIndex=0;
@@ -474,6 +499,7 @@ function typeLetter(){
 if(letterIndex < letterMessage.length){
 
 letterText.innerHTML += letterMessage.charAt(letterIndex);
+
 letterIndex++;
 
 setTimeout(typeLetter,40);
