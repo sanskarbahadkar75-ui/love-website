@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sanskar 💗 Fahima</title>
+
+<style>
+
+/* BODY */
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+color:white;
+text-align:center;
+overflow-x:hidden;
+
+background:
+radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(255,255,255,0.15), transparent 40%),
+radial-gradient(circle at 50% 80%, rgba(255,255,255,0.12), transparent 40%),
+linear-gradient(135deg,#ff4b6e,#ff9a9e);
+}
+
+/* SCREEN */
+.screen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:25px;
+padding:20px;
+position:relative;
+overflow:hidden;
+}
+
+/* BUTTON */
+.btn{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+#yesBtn{
+background:white;
+color:#ff4b6e;
+box-shadow:0 0 20px pink;
+}
+
+#noBtn{
+background:#ff2f5b;
+color:white;
+}
+
+/* SPARKLES */
+.sparkle{
+position:absolute;
+width:6px;
+height:6px;
+border-radius:50%;
+background:gold;
+animation:spark 2s linear forwards;
+pointer-events:none;
+}
+
+@keyframes spark{
+0%{transform:scale(1);opacity:1;}
+100%{transform:scale(8);opacity:0;}
+}
+
+/* FLOATING HEARTS */
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:18px;
+opacity:0.7;
+animation:float 6s linear infinite;
+pointer-events:none;
+}
+
+@keyframes float{
+to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* LETTER */
+.letter{
+max-width:800px;
+background:rgba(255,255,255,0.12);
+padding:30px;
+border-radius:25px;
+box-shadow:0 0 30px rgba(255,255,255,0.4);
+text-align:left;
+line-height:1.7;
+font-size:20px;
+animation:fade 1.5s;
+}
+
+/* ROSE */
+.rose-box{
+display:flex;
+gap:30px;
+}
+
+.rose{
+position:relative;
+font-size:75px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.rose:hover{
+transform:scale(1.2);
+}
+
+.ring{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+font-size:40px;
+transition:0.4s;
+}
+
+.rose.open .ring{
+transform:translate(-50%,-50%) scale(1);
+animation:ring 0.6s ease;
+}
+
+@keyframes ring{
+0%{transform:translate(-50%,-50%) scale(0);}
+70%{transform:translate(-50%,-50%) scale(1.3);}
+100%{transform:translate(-50%,-50%) scale(1);}
+}
+
+/* MAIN */
+#main{
+display:none;
+padding:35px;
+max-width:900px;
+margin:auto;
+background:rgba(255,255,255,0.1);
+border-radius:25px;
+box-shadow:0 0 30px rgba(255,255,255,0.25);
+}
+
+/* GLOW */
+.glow{
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 5px pink;}
+to{text-shadow:0 0 20px white;}
+}
+
+/* TYPING */
+#typing{
+font-size:22px;
+max-width:700px;
+margin:auto;
+line-height:1.6;
+}
+
+/* GALLERY */
+.gallery-wrap{
+perspective:1200px;
+margin:40px auto;
+width:260px;
+height:360px;
+touch-action:none;
+}
+
+.gallery{
+width:100%;
+height:100%;
+position:relative;
+transform-style:preserve-3d;
+}
+
+.gallery img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:20px;
+}
+
+/* VIDEO */
+video{
+width:85%;
+max-width:420px;
+border-radius:20px;
+margin-top:40px;
+}
+
+footer{
+margin:40px 0;
+font-size:22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="song.mp3" loop></audio>
+
+<!-- PROPOSAL -->
+<div id="proposal" class="screen">
+
+<h1 class="glow">💖 Will You Be Mine Forever? 💖</h1>
+
+<div>
+<button id="yesBtn" class="btn" onclick="goRose()">YES 😍</button>
+<button id="noBtn" class="btn" onclick="shrinkNo()">NO 😒</button>
+</div>
+
+</div>
+
+<!-- ROSE -->
+<div id="rosePage" class="screen" style="display:none;">
+
+<h1 class="glow">🌹 Choose the Special Rose 🌹</h1>
+
+<div class="rose-box">
+
+<div class="rose" onclick="pickRose(1)">🌹<div class="ring">❌</div></div>
+<div class="rose" onclick="pickRose(2)">🌹<div class="ring">💍</div></div>
+<div class="rose" onclick="pickRose(3)">🌹<div class="ring">❌</div></div>
+
+</div>
+
+<p id="roseMsg"></p>
+
+</div>
+
+<!-- MESSAGE PAGE -->
+<div id="messagePage" class="screen" style="display:none;">
+
+<h1 class="glow">💌 A Message For You 💌</h1>
+
+<button class="btn" onclick="openLetter()">Open My Letter ❤️</button>
+
+</div>
+
+<!-- LETTER -->
+<div id="letterPage" class="screen" style="display:none;">
+
+<div class="letter">
+
+<h2>My Dearest Chikudiii 💕</h2>
+
+<p>
+From the moment you came into my life,
+everything became brighter and more beautiful.
+Your smile is my favorite view,
+your voice is my favorite sound,
+and your love is my greatest blessing.
+</p>
+
+<p>
+Every day with you feels like a dream
+that I never want to wake up from.
+You are not just my girlfriend,
+you are my best friend,
+my safe place,
+my forever.
+</p>
+
+<p>
+I promise to stand by you in every situation,
+to support your dreams,
+to wipe your tears,
+and to celebrate your success.
+With you, I have found my home.
+</p>
+
+<p>
+One day, I will hold your hands,
+look into your eyes,
+and say “I do” with a smile.
+Until then, I will keep loving you more every day.
+</p>
+
+<p>
+Forever Yours,<br>
+<strong>Sanskar ❤️</strong>
+</p>
+
+</div>
+
+<button class="btn" onclick="goMain()">Continue 💖</button>
+
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<h1 class="glow">Happy Rose Day Chikudiii 🌹💖</h1>
+
+<p id="typing"></p>
+
+<h2>💞 Our Memories 💞</h2>
+
+<div class="gallery-wrap" id="wrap">
+
+<div class="gallery" id="gallery">
+
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+
+</div>
+</div>
+
+<h2>🎬 Our Video 🎬</h2>
+
+<video controls>
+<source src="video1.mp4">
+</video>
+
+<footer class="glow">
+I loveee youuu piluuuuuu 😘❤️<br>
+Sanskar 💗 Fahima
+</footer>
+
+</div>
+
+<script>
+
+/* HEARTS */
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=15+Math.random()*15+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},900);
+
+/* SPARKLES */
+function spark(el){
+
+for(let i=0;i<15;i++){
+
+const s=document.createElement("div");
+s.className="sparkle";
+
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+
+el.appendChild(s);
+
+setTimeout(()=>s.remove(),2000);
+}
+}
+
+/* NO SHRINK */
+let noSize=20;
+
+function shrinkNo(){
+noSize-=3;
+if(noSize<=5){
+document.getElementById("noBtn").style.display="none";
+}
+document.getElementById("noBtn").style.fontSize=noSize+"px";
+}
+
+/* GO ROSE */
+function goRose(){
+
+spark(document.getElementById("proposal"));
+
+document.getElementById("proposal").style.display="none";
+document.getElementById("rosePage").style.display="flex";
+}
+
+/* ROSE */
+let roseDone=false;
+
+function pickRose(n){
+
+if(roseDone) return;
+
+const roses=document.querySelectorAll(".rose");
+
+roses[n-1].classList.add("open");
+
+spark(document.getElementById("rosePage"));
+
+if(n===2){
+
+document.getElementById("roseMsg").innerHTML=
+"💍 Yeahhh! We Will Get Married 😍❤️";
+
+roseDone=true;
+
+setTimeout(()=>{
+document.getElementById("rosePage").style.display="none";
+document.getElementById("messagePage").style.display="flex";
+},2200);
+
+}else{
+
+document.getElementById("roseMsg").innerHTML=
+"😅 Try Again My Love 🌹";
+
+}
+}
+
+/* LETTER */
+function openLetter(){
+
+spark(document.getElementById("messagePage"));
+
+document.getElementById("messagePage").style.display="none";
+document.getElementById("letterPage").style.display="flex";
+}
+
+function goMain(){
+
+spark(document.getElementById("letterPage"));
+
+document.getElementById("letterPage").style.display="none";
+document.getElementById("main").style.display="block";
+
+document.getElementById("music").play();
+
+startGallery();
+typeWriter();
+}
+
+/* MESSAGE */
+const text=`My Chikudiii 💕,
+
+You are my forever,
+my happiness,
+my home ❤️💍
+
+I love you endlessly 😘`;
+
+let i=0;
+
+/* TYPE */
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,55);
+}
+}
+
+/* GALLERY */
+
+const gallery=document.getElementById("gallery");
+const imgs=gallery.children;
+
+let angle=0;
+let auto=true;
+let startX=0;
+
+for(let i=0;i<imgs.length;i++){
+imgs[i].style.transform=
+`rotateY(${i*72}deg) translateZ(320px)`;
+}
+
+function startGallery(){
+
+setInterval(()=>{
+if(auto){
+angle+=0.3;
+gallery.style.transform=`rotateY(${angle}deg)`;
+}
+},20);
+}
+
+/* DRAG */
+
+const wrap=document.getElementById("wrap");
+
+wrap.addEventListener("mousedown",startDrag);
+wrap.addEventListener("touchstart",startDrag);
+
+function startDrag(e){
+
+auto=false;
+
+startX=e.touches?e.touches[0].clientX:e.clientX;
+
+document.addEventListener("mousemove",drag);
+document.addEventListener("touchmove",drag);
+
+document.addEventListener("mouseup",endDrag);
+document.addEventListener("touchend",endDrag);
+}
+
+function drag(e){
+
+let x=e.touches?e.touches[0].clientX:e.clientX;
+
+let diff=x-startX;
+
+angle+=diff*0.3;
+
+gallery.style.transform=`rotateY(${angle}deg)`;
+
+startX=x;
+}
+
+function endDrag(){
+
+auto=true;
+
+document.removeEventListener("mousemove",drag);
+document.removeEventListener("touchmove",drag);
+}
+
+</script>
+
+</body>
+</html>
