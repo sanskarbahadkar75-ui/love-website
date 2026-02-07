@@ -89,6 +89,7 @@ border-radius:15px;
 text-align:left;
 line-height:1.7;
 font-size:20px;
+white-space:pre-line;
 }
 
 </style>
@@ -185,36 +186,7 @@ font-size:20px;
 
 <h2>My Dearest Chikudiii 💕</h2>
 
-<p>
-From the first day you came into my life,
-everything changed beautifully.
-You became my smile, my peace,
-my biggest blessing ❤️
-</p>
-
-<p>
-With you, every little moment feels special.
-Your voice makes my heart calm,
-your laughter makes my world bright.
-I never knew love could be this pure.
-</p>
-
-<p>
-I promise to stand with you in every situation,
-to protect you, respect you,
-and love you more every day 💍
-</p>
-
-<p>
-No matter where life takes us,
-I will always choose you,
-again and again.
-</p>
-
-<p>
-Forever Yours,<br>
-Sanskar ❤️
-</p>
+<p id="letterText"></p>
 
 </div>
 
@@ -368,6 +340,8 @@ hideAll();
 letterPage.style.display="flex";
 
 music.play();
+
+startLetterTyping();
 }
 
 /* MAIN */
@@ -387,7 +361,7 @@ el.style.display="none";
 });
 }
 
-/* TYPE */
+/* TYPE MAIN */
 const text=`My Chikudiii 💕
 You are my forever ❤️`;
 
@@ -400,6 +374,53 @@ if(i<text.length){
 typing.innerHTML+=text.charAt(i);
 i++;
 setTimeout(typeWriter,70);
+}
+}
+
+/* LETTER TYPING */
+
+const letterMessage = `
+From the first day you came into my life,
+everything changed beautifully.
+You became my smile, my peace,
+my biggest blessing ❤️
+
+With you, every little moment feels special.
+Your voice makes my heart calm,
+your laughter makes my world bright.
+I never knew love could be this pure.
+
+I promise to stand with you in every situation,
+to protect you, respect you,
+and love you more every day 💍
+
+No matter where life takes us,
+I will always choose you,
+again and again.
+
+Forever Yours,
+Sanskar ❤️
+`;
+
+let letterIndex=0;
+
+function startLetterTyping(){
+
+letterIndex=0;
+letterText.innerHTML="";
+
+typeLetter();
+}
+
+function typeLetter(){
+
+if(letterIndex < letterMessage.length){
+
+letterText.innerHTML += letterMessage.charAt(letterIndex);
+
+letterIndex++;
+
+setTimeout(typeLetter,40);
 }
 }
 
