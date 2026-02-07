@@ -6,43 +6,34 @@
 
 <style>
 
-/* BODY */
 body{
 margin:0;
-font-family:'Segoe UI',sans-serif;
+font-family:Segoe UI,sans-serif;
 color:white;
 text-align:center;
-overflow-x:hidden;
-
-background:
-radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 40%),
-radial-gradient(circle at 80% 30%, rgba(255,255,255,0.15), transparent 40%),
-radial-gradient(circle at 50% 80%, rgba(255,255,255,0.12), transparent 40%),
-linear-gradient(135deg,#ff4b6e,#ff9a9e);
+background:linear-gradient(135deg,#ff4b6e,#ff9a9e);
 }
 
-/* SCREEN */
+/* Screens */
 .screen{
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-gap:25px;
+gap:20px;
 padding:20px;
 }
 
-/* CARD */
+/* Card */
 .card{
 background:rgba(255,255,255,0.12);
-padding:35px;
+padding:30px;
 border-radius:25px;
-box-shadow:0 0 30px rgba(255,255,255,0.4);
 max-width:750px;
-width:100%;
 }
 
-/* BUTTON */
+/* Button */
 .btn{
 padding:15px 35px;
 font-size:20px;
@@ -50,111 +41,55 @@ border:none;
 border-radius:30px;
 cursor:pointer;
 font-weight:bold;
-transition:0.3s;
-}
-
-.btn:hover{transform:scale(1.1);}
-
-.primary{
 background:white;
 color:#ff4b6e;
-box-shadow:0 0 20px pink;
 }
 
-/* GLOW */
+/* Glow */
 .glow{
 animation:glow 2s infinite alternate;
 }
-
 @keyframes glow{
 from{text-shadow:0 0 5px pink;}
 to{text-shadow:0 0 20px white;}
 }
 
-/* PASSWORD */
-input{
-padding:12px;
-border:none;
-border-radius:20px;
-font-size:18px;
-text-align:center;
+/* Balloons */
+.balloon{
+font-size:50px;
+cursor:pointer;
 }
 
-/* TIMER */
-#timer{
-font-size:22px;
-margin:10px 0;
-color:#ffe6f0;
+/* Hearts */
+.heart{
+font-size:40px;
+position:absolute;
+cursor:pointer;
 }
 
-/* PHOTO ANIM */
-.profile{
-width:140px;
-height:140px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid white;
-animation:zoom 3s infinite alternate;
-}
-
-@keyframes zoom{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
-}
-
-/* ROSE */
-.rose-box{display:flex;gap:30px;}
-
-.rose{font-size:70px;cursor:pointer;transition:.3s;}
-
-.rose:hover{transform:scale(1.2);}
-
-/* LETTER */
-.letter{text-align:left;line-height:1.7;font-size:20px;}
-
-/* MAIN */
+/* Main */
 #main{
 display:none;
-padding:35px;
-max-width:900px;
-margin:auto;
-background:rgba(255,255,255,0.1);
-border-radius:25px;
+padding:30px;
 }
 
-/* GALLERY */
-.gallery-wrap{
-perspective:1200px;
-margin:40px auto;
-width:260px;
-height:360px;
-touch-action:none;
-}
-
+/* Gallery */
 .gallery{
-width:100%;
-height:100%;
-position:relative;
-transform-style:preserve-3d;
+display:flex;
+gap:10px;
+overflow-x:auto;
 }
-
 .gallery img{
-position:absolute;
-width:100%;
-height:100%;
-object-fit:cover;
-border-radius:20px;
+width:180px;
+border-radius:15px;
 }
 
-/* VIDEO */
-video{
-width:85%;
-max-width:420px;
-border-radius:20px;
-margin-top:40px;
+/* Letter */
+.letter{
+text-align:left;
+line-height:1.7;
+font-size:20px;
 }
-
-footer{margin:40px 0;font-size:22px;}
 
 </style>
 </head>
@@ -167,88 +102,79 @@ footer{margin:40px 0;font-size:22px;}
 <div id="passPage" class="screen">
 
 <div class="card">
-<h1 class="glow">🔐 Secret Entry 💖</h1>
-<p>Enter Our Special Word 😘</p>
 
-<input type="password" id="pass" placeholder="Password">
+<h1 class="glow">🔐 Secret Entry</h1>
 
-<br><br>
+<input id="pass" type="password" placeholder="Password"><br><br>
 
-<button class="btn primary" onclick="checkPass()">Enter ❤️</button>
+<button class="btn" onclick="checkPass()">Enter ❤️</button>
 
 <p id="passMsg"></p>
-</div>
 
 </div>
+</div>
 
-<!-- SURPRISE -->
+<!-- START -->
 <div id="startPage" class="screen" style="display:none;">
 
 <div class="card">
 
-<img src="photo1.jpg" class="profile">
+<h1 class="glow">💝 Here's Your Surprise</h1>
 
-<h1 class="glow">💝 Here's Your Surprise 💝</h1>
+<button class="btn" onclick="goBalloon()">Let's Start 🚀</button>
 
-<p id="timer"></p>
+</div>
+</div>
 
-<button class="btn primary" onclick="goGame()">Let's Get Started 🚀</button>
+<!-- BALLOON GAME -->
+<div id="balloonPage" class="screen" style="display:none;">
+
+<h1>🎈 Pop 5 Balloons</h1>
+
+<div id="balloons"></div>
+
+<p id="balloonMsg"></p>
 
 </div>
 
+<!-- HEART GAME -->
+<div id="heartPage" class="screen" style="display:none;">
+
+<h1>💖 Catch The Heart</h1>
+
+<div id="heart" class="heart">❤️</div>
+
+<p id="heartMsg"></p>
+
 </div>
 
-<!-- GAME -->
-<div id="gamePage" class="screen" style="display:none;">
+<!-- QUIZ -->
+<div id="quizPage" class="screen" style="display:none;">
 
 <div class="card">
 
-<h1 class="glow">🎮 Love Challenge 💖</h1>
+<h1>🧠 Love Quiz</h1>
 
-<h3>Who Loves You The Most? 😘</h3>
+<p>Who is my forever?</p>
 
-<button class="btn primary" onclick="rightAns()">Sanskar ❤️</button>
-<button class="btn" onclick="wrongAns()">Someone Else 😅</button>
+<button class="btn" onclick="quizRight()">Fahima ❤️</button>
+<button class="btn" onclick="quizWrong()">Anyone 😅</button>
 
-<p id="gameMsg"></p>
-
-</div>
+<p id="quizMsg"></p>
 
 </div>
-
-<!-- PROPOSAL -->
-<div id="proposal" class="screen" style="display:none;">
-
-<h1 class="glow">💖 Will You Be Mine Forever? 💖</h1>
-
-<div>
-<button class="btn primary" onclick="goRose()">YES 😍</button>
-<button class="btn" onclick="shrinkNo()">NO 😒</button>
 </div>
 
-</div>
+<!-- RING -->
+<div id="ringPage" class="screen" style="display:none;">
 
-<!-- ROSE -->
-<div id="rosePage" class="screen" style="display:none;">
+<h1>💍 Find The Ring</h1>
 
-<h1 class="glow">🌹 Choose the Special Rose 🌹</h1>
+<button class="btn" onclick="findRing(1)">Box 1</button>
+<button class="btn" onclick="findRing(2)">Box 2</button>
+<button class="btn" onclick="findRing(3)">Box 3</button>
 
-<div class="rose-box">
-<div class="rose" onclick="pickRose(1)">🌹</div>
-<div class="rose" onclick="pickRose(2)">🌹</div>
-<div class="rose" onclick="pickRose(3)">🌹</div>
-</div>
-
-<p id="roseMsg"></p>
-
-</div>
-
-<!-- MESSAGE -->
-<div id="messagePage" class="screen" style="display:none;">
-
-<h1 class="glow">💌 A Message For You 💌</h1>
-
-<button class="btn primary" onclick="openLetter()">Open My Letter ❤️</button>
+<p id="ringMsg"></p>
 
 </div>
 
@@ -259,15 +185,40 @@ footer{margin:40px 0;font-size:22px;}
 
 <h2>My Dearest Chikudiii 💕</h2>
 
-<p>You are my happiness, my life, my everything ❤️</p>
+<p>
+From the first day you came into my life,
+everything changed beautifully.
+You became my smile, my peace,
+my biggest blessing ❤️
+</p>
 
-<p>I promise to love you forever 💍</p>
+<p>
+With you, every little moment feels special.
+Your voice makes my heart calm,
+your laughter makes my world bright.
+I never knew love could be this pure.
+</p>
 
-<p>Forever Yours,<br>Sanskar ❤️</p>
+<p>
+I promise to stand with you in every situation,
+to protect you, respect you,
+and love you more every day 💍
+</p>
+
+<p>
+No matter where life takes us,
+I will always choose you,
+again and again.
+</p>
+
+<p>
+Forever Yours,<br>
+Sanskar ❤️
+</p>
 
 </div>
 
-<button class="btn primary" onclick="goMain()">Continue 💖</button>
+<button class="btn" onclick="goMain()">Continue 💖</button>
 
 </div>
 
@@ -278,8 +229,7 @@ footer{margin:40px 0;font-size:22px;}
 
 <p id="typing"></p>
 
-<div class="gallery-wrap" id="wrap">
-<div class="gallery" id="gallery">
+<div class="gallery">
 
 <img src="photo1.jpg">
 <img src="photo2.jpg">
@@ -288,14 +238,15 @@ footer{margin:40px 0;font-size:22px;}
 <img src="photo5.jpg">
 
 </div>
-</div>
 
-<h2>🎬 Our Video 🎬</h2>
+<h2>🎬 Our Video</h2>
 
-<video controls><source src="video1.mp4"></video>
+<video width="300" controls>
+<source src="video1.mp4">
+</video>
 
-<footer class="glow">
-I love you forever 😘❤️
+<footer>
+I Love You Forever 😘❤️
 </footer>
 
 </div>
@@ -303,79 +254,120 @@ I love you forever 😘❤️
 <script>
 
 /* PASSWORD */
-const secret="love123"; // CHANGE PASSWORD HERE ❤️
-
 function checkPass(){
 
-const p=document.getElementById("pass").value;
-
-if(p===secret){
+if(pass.value==="love123"){
 
 hideAll();
-document.getElementById("startPage").style.display="flex";
+startPage.style.display="flex";
 
 }else{
-
-document.getElementById("passMsg").innerHTML="❌ Wrong Password!";
+passMsg.innerHTML="❌ Wrong Password";
 }
 }
 
-/* TIMER */
-const startDate=new Date("2026-01-21"); // CHANGE DATE ❤️
+/* BALLOON */
+let popped=0;
 
-function updateTimer(){
+function goBalloon(){
 
-const now=new Date();
-const diff=now-startDate;
+hideAll();
+balloonPage.style.display="flex";
 
-const days=Math.floor(diff/(1000*60*60*24));
+balloons.innerHTML="";
+popped=0;
 
-document.getElementById("timer").innerHTML=
-"💞 Together for "+days+" Days 💞";
+for(let i=0;i<7;i++){
+
+const b=document.createElement("span");
+b.className="balloon";
+b.innerHTML="🎈";
+b.onclick=function(){
+
+this.remove();
+popped++;
+
+if(popped>=5){
+balloonMsg.innerHTML="😍 You Won!";
+setTimeout(goHeart,1200);
+}
+};
+
+balloons.appendChild(b);
+}
 }
 
-setInterval(updateTimer,1000);
-updateTimer();
+/* HEART */
+function goHeart(){
 
-/* GAME */
-function goGame(){hideAll();gamePage.style.display="flex";}
+hideAll();
+heartPage.style.display="flex";
 
-function rightAns(){
-gameMsg.innerHTML="😍 Correct!";
-setTimeout(()=>{hideAll();proposal.style.display="flex";},1200);
+moveHeart();
 }
 
-function wrongAns(){gameMsg.innerHTML="😅 Try Again!";}
+function moveHeart(){
 
-/* NO */
-let noSize=20;
+const h=document.getElementById("heart");
 
-function shrinkNo(){
-noSize-=3;
-if(noSize<=5)proposal.querySelectorAll(".btn")[1].style.display="none";
+h.style.left=Math.random()*80+"%";
+h.style.top=Math.random()*70+"%";
 }
 
-/* ROSE */
-function goRose(){hideAll();rosePage.style.display="flex";}
+heart.onclick=function(){
 
-function pickRose(n){
+heartMsg.innerHTML="💖 Caught!";
+setTimeout(goQuiz,1000);
+};
 
-if(n===2){
+setInterval(moveHeart,1000);
 
-roseMsg.innerHTML="💍 We Will Get Married 😍";
+/* QUIZ */
+function goQuiz(){
 
-setTimeout(()=>{hideAll();messagePage.style.display="flex";},1500);
+hideAll();
+quizPage.style.display="flex";
+}
 
-}else roseMsg.innerHTML="😅 Try Again!";
+function quizRight(){
+
+quizMsg.innerHTML="😍 Correct!";
+setTimeout(goRing,1200);
+}
+
+function quizWrong(){
+
+quizMsg.innerHTML="😅 Try Again!";
+}
+
+/* RING */
+const ringBox=2;
+
+function goRing(){
+
+hideAll();
+ringPage.style.display="flex";
+}
+
+function findRing(n){
+
+if(n===ringBox){
+
+ringMsg.innerHTML="💍 Found It!";
+setTimeout(goLetter,1200);
+
+}else{
+ringMsg.innerHTML="😅 Wrong Box!";
+}
 }
 
 /* LETTER */
-function openLetter(){
-
-document.getElementById("music").play();
+function goLetter(){
 
 hideAll();
 letterPage.style.display="flex";
+
+music.play();
 }
 
 /* MAIN */
@@ -385,7 +377,6 @@ hideAll();
 main.style.display="block";
 
 typeWriter();
-startGallery();
 }
 
 /* HIDE */
@@ -408,67 +399,11 @@ if(i<text.length){
 
 typing.innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,60);
+setTimeout(typeWriter,70);
 }
 }
-
-/* GALLERY */
-const gallery=document.getElementById("gallery");
-const imgs=gallery.children;
-
-let angle=0,auto=true,startX=0;
-
-for(let i=0;i<imgs.length;i++){
-imgs[i].style.transform=
-`rotateY(${i*72}deg) translateZ(320px)`;
-}
-
-function startGallery(){
-
-setInterval(()=>{
-if(auto){
-angle+=0.3;
-gallery.style.transform=`rotateY(${angle}deg)`;
-}
-},20);
-}
-
-/* DRAG */
-const wrap=document.getElementById("wrap");
-
-wrap.addEventListener("mousedown",startDrag);
-wrap.addEventListener("touchstart",startDrag);
-
-function startDrag(e){
-
-auto=false;
-
-startX=e.touches?e.touches[0].clientX:e.clientX;
-
-document.addEventListener("mousemove",drag);
-document.addEventListener("touchmove",drag);
-
-document.addEventListener("mouseup",endDrag);
-document.addEventListener("touchend",endDrag);
-}
-
-function drag(e){
-
-let x=e.touches?e.touches[0].clientX:e.clientX;
-
-let diff=x-startX;
-
-angle+=diff*0.3;
-
-gallery.style.transform=`rotateY(${angle}deg)`;
-
-startX=x;
-}
-
-function endDrag(){auto=true;}
 
 </script>
 
 </body>
 </html>
-
