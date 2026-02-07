@@ -14,6 +14,7 @@ text-align:center;
 background:linear-gradient(135deg,#ff4b6e,#ff9a9e);
 }
 
+/* Screens */
 .screen{
 height:100vh;
 display:flex;
@@ -24,6 +25,7 @@ gap:20px;
 padding:20px;
 }
 
+/* Card */
 .card{
 background:rgba(255,255,255,0.12);
 padding:30px;
@@ -32,6 +34,7 @@ max-width:750px;
 width:100%;
 }
 
+/* Button */
 .btn{
 padding:15px 35px;
 font-size:20px;
@@ -43,6 +46,7 @@ background:white;
 color:#ff4b6e;
 }
 
+/* Glow */
 .glow{
 animation:glow 2s infinite alternate;
 }
@@ -51,8 +55,14 @@ from{text-shadow:0 0 5px pink;}
 to{text-shadow:0 0 20px white;}
 }
 
-.balloon{font-size:50px;cursor:pointer;margin:5px;}
+/* Balloons */
+.balloon{
+font-size:50px;
+cursor:pointer;
+margin:5px;
+}
 
+/* Slider */
 .slider{
 width:250px;
 }
@@ -65,6 +75,7 @@ margin:5px auto;
 border-radius:5px;
 }
 
+/* Letter */
 .letter{
 text-align:left;
 line-height:1.7;
@@ -72,10 +83,32 @@ font-size:20px;
 white-space:pre-line;
 }
 
-#main{display:none;padding:30px;}
+.letter h2{
+margin-bottom:8px;
+margin-top:0;
+}
 
-.gallery{display:flex;gap:10px;overflow-x:auto;}
-.gallery img{width:180px;border-radius:15px;}
+.letter p{
+margin-top:4px;
+margin-bottom:6px;
+}
+
+/* Main */
+#main{
+display:none;
+padding:30px;
+}
+
+/* Gallery */
+.gallery{
+display:flex;
+gap:10px;
+overflow-x:auto;
+}
+.gallery img{
+width:180px;
+border-radius:15px;
+}
 
 </style>
 </head>
@@ -206,7 +239,9 @@ class="slider" id="loveSlider">
 <source src="video1.mp4">
 </video>
 
-<footer>I Love You Forever 😘❤️</footer>
+<footer>
+I Love You Forever 😘❤️
+</footer>
 
 </div>
 
@@ -256,7 +291,7 @@ balloons.appendChild(b);
 }
 }
 
-/* SLIDER GAME */
+/* SLIDER */
 function goSlider(){
 
 hideAll();
