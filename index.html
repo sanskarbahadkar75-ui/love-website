@@ -30,8 +30,16 @@ justify-content:center;
 align-items:center;
 gap:25px;
 padding:20px;
-position:relative;
-overflow:hidden;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.12);
+padding:35px;
+border-radius:25px;
+box-shadow:0 0 30px rgba(255,255,255,0.4);
+max-width:750px;
+width:100%;
 }
 
 /* BUTTON */
@@ -45,110 +53,12 @@ font-weight:bold;
 transition:0.3s;
 }
 
-.btn:hover{
-transform:scale(1.1);
-}
+.btn:hover{transform:scale(1.1);}
 
-#yesBtn{
+.primary{
 background:white;
 color:#ff4b6e;
 box-shadow:0 0 20px pink;
-}
-
-#noBtn{
-background:#ff2f5b;
-color:white;
-}
-
-/* SPARKLES */
-.sparkle{
-position:absolute;
-width:6px;
-height:6px;
-border-radius:50%;
-background:gold;
-animation:spark 2s linear forwards;
-pointer-events:none;
-}
-
-@keyframes spark{
-0%{transform:scale(1);opacity:1;}
-100%{transform:scale(8);opacity:0;}
-}
-
-/* FLOATING HEARTS */
-.heart{
-position:fixed;
-bottom:-10px;
-font-size:18px;
-opacity:0.7;
-animation:float 6s linear infinite;
-pointer-events:none;
-}
-
-@keyframes float{
-to{transform:translateY(-110vh);opacity:0;}
-}
-
-/* LETTER */
-.letter{
-max-width:800px;
-background:rgba(255,255,255,0.12);
-padding:30px;
-border-radius:25px;
-box-shadow:0 0 30px rgba(255,255,255,0.4);
-text-align:left;
-line-height:1.7;
-font-size:20px;
-animation:fade 1.5s;
-}
-
-/* ROSE */
-.rose-box{
-display:flex;
-gap:30px;
-}
-
-.rose{
-position:relative;
-font-size:75px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.rose:hover{
-transform:scale(1.2);
-}
-
-.ring{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0);
-font-size:40px;
-transition:0.4s;
-}
-
-.rose.open .ring{
-transform:translate(-50%,-50%) scale(1);
-animation:ring 0.6s ease;
-}
-
-@keyframes ring{
-0%{transform:translate(-50%,-50%) scale(0);}
-70%{transform:translate(-50%,-50%) scale(1.3);}
-100%{transform:translate(-50%,-50%) scale(1);}
-}
-
-/* MAIN */
-#main{
-display:none;
-padding:35px;
-max-width:900px;
-margin:auto;
-background:rgba(255,255,255,0.1);
-border-radius:25px;
-box-shadow:0 0 30px rgba(255,255,255,0.25);
 }
 
 /* GLOW */
@@ -161,12 +71,55 @@ from{text-shadow:0 0 5px pink;}
 to{text-shadow:0 0 20px white;}
 }
 
-/* TYPING */
-#typing{
+/* PASSWORD */
+input{
+padding:12px;
+border:none;
+border-radius:20px;
+font-size:18px;
+text-align:center;
+}
+
+/* TIMER */
+#timer{
 font-size:22px;
-max-width:700px;
+margin:10px 0;
+color:#ffe6f0;
+}
+
+/* PHOTO ANIM */
+.profile{
+width:140px;
+height:140px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid white;
+animation:zoom 3s infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* ROSE */
+.rose-box{display:flex;gap:30px;}
+
+.rose{font-size:70px;cursor:pointer;transition:.3s;}
+
+.rose:hover{transform:scale(1.2);}
+
+/* LETTER */
+.letter{text-align:left;line-height:1.7;font-size:20px;}
+
+/* MAIN */
+#main{
+display:none;
+padding:35px;
+max-width:900px;
 margin:auto;
-line-height:1.6;
+background:rgba(255,255,255,0.1);
+border-radius:25px;
 }
 
 /* GALLERY */
@@ -201,10 +154,7 @@ border-radius:20px;
 margin-top:40px;
 }
 
-footer{
-margin:40px 0;
-font-size:22px;
-}
+footer{margin:40px 0;font-size:22px;}
 
 </style>
 </head>
@@ -213,14 +163,67 @@ font-size:22px;
 
 <audio id="music" src="song.mp3" loop></audio>
 
+<!-- PASSWORD -->
+<div id="passPage" class="screen">
+
+<div class="card">
+<h1 class="glow">🔐 Secret Entry 💖</h1>
+<p>Enter Our Special Word 😘</p>
+
+<input type="password" id="pass" placeholder="Password">
+
+<br><br>
+
+<button class="btn primary" onclick="checkPass()">Enter ❤️</button>
+
+<p id="passMsg"></p>
+</div>
+
+</div>
+
+<!-- SURPRISE -->
+<div id="startPage" class="screen" style="display:none;">
+
+<div class="card">
+
+<img src="photo1.jpg" class="profile">
+
+<h1 class="glow">💝 Here's Your Surprise 💝</h1>
+
+<p id="timer"></p>
+
+<button class="btn primary" onclick="goGame()">Let's Get Started 🚀</button>
+
+</div>
+
+</div>
+
+<!-- GAME -->
+<div id="gamePage" class="screen" style="display:none;">
+
+<div class="card">
+
+<h1 class="glow">🎮 Love Challenge 💖</h1>
+
+<h3>Who Loves You The Most? 😘</h3>
+
+<button class="btn primary" onclick="rightAns()">Sanskar ❤️</button>
+<button class="btn" onclick="wrongAns()">Someone Else 😅</button>
+
+<p id="gameMsg"></p>
+
+</div>
+
+</div>
+
 <!-- PROPOSAL -->
-<div id="proposal" class="screen">
+<div id="proposal" class="screen" style="display:none;">
 
 <h1 class="glow">💖 Will You Be Mine Forever? 💖</h1>
 
 <div>
-<button id="yesBtn" class="btn" onclick="goRose()">YES 😍</button>
-<button id="noBtn" class="btn" onclick="shrinkNo()">NO 😒</button>
+<button class="btn primary" onclick="goRose()">YES 😍</button>
+<button class="btn" onclick="shrinkNo()">NO 😒</button>
 </div>
 
 </div>
@@ -231,73 +234,40 @@ font-size:22px;
 <h1 class="glow">🌹 Choose the Special Rose 🌹</h1>
 
 <div class="rose-box">
-
-<div class="rose" onclick="pickRose(1)">🌹<div class="ring">❌</div></div>
-<div class="rose" onclick="pickRose(2)">🌹<div class="ring">💍</div></div>
-<div class="rose" onclick="pickRose(3)">🌹<div class="ring">❌</div></div>
-
+<div class="rose" onclick="pickRose(1)">🌹</div>
+<div class="rose" onclick="pickRose(2)">🌹</div>
+<div class="rose" onclick="pickRose(3)">🌹</div>
 </div>
 
 <p id="roseMsg"></p>
 
 </div>
 
-<!-- MESSAGE PAGE -->
+<!-- MESSAGE -->
 <div id="messagePage" class="screen" style="display:none;">
 
 <h1 class="glow">💌 A Message For You 💌</h1>
 
-<button class="btn" onclick="openLetter()">Open My Letter ❤️</button>
+<button class="btn primary" onclick="openLetter()">Open My Letter ❤️</button>
 
 </div>
 
 <!-- LETTER -->
 <div id="letterPage" class="screen" style="display:none;">
 
-<div class="letter">
+<div class="card letter">
 
 <h2>My Dearest Chikudiii 💕</h2>
 
-<p>
-From the moment you came into my life,
-everything became brighter and more beautiful.
-Your smile is my favorite view,
-your voice is my favorite sound,
-and your love is my greatest blessing.
-</p>
+<p>You are my happiness, my life, my everything ❤️</p>
 
-<p>
-Every day with you feels like a dream
-that I never want to wake up from.
-You are not just my girlfriend,
-you are my best friend,
-my safe place,
-my forever.
-</p>
+<p>I promise to love you forever 💍</p>
 
-<p>
-I promise to stand by you in every situation,
-to support your dreams,
-to wipe your tears,
-and to celebrate your success.
-With you, I have found my home.
-</p>
-
-<p>
-One day, I will hold your hands,
-look into your eyes,
-and say “I do” with a smile.
-Until then, I will keep loving you more every day.
-</p>
-
-<p>
-Forever Yours,<br>
-<strong>Sanskar ❤️</strong>
-</p>
+<p>Forever Yours,<br>Sanskar ❤️</p>
 
 </div>
 
-<button class="btn" onclick="goMain()">Continue 💖</button>
+<button class="btn primary" onclick="goMain()">Continue 💖</button>
 
 </div>
 
@@ -308,10 +278,7 @@ Forever Yours,<br>
 
 <p id="typing"></p>
 
-<h2>💞 Our Memories 💞</h2>
-
 <div class="gallery-wrap" id="wrap">
-
 <div class="gallery" id="gallery">
 
 <img src="photo1.jpg">
@@ -325,152 +292,131 @@ Forever Yours,<br>
 
 <h2>🎬 Our Video 🎬</h2>
 
-<video controls>
-<source src="video1.mp4">
-</video>
+<video controls><source src="video1.mp4"></video>
 
 <footer class="glow">
-I loveee youuu piluuuuuu 😘❤️<br>
-Sanskar 💗 Fahima
+I love you forever 😘❤️
 </footer>
 
 </div>
 
 <script>
 
-/* HEARTS */
-setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=15+Math.random()*15+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},900);
+/* PASSWORD */
+const secret="love123"; // CHANGE PASSWORD HERE ❤️
 
-/* SPARKLES */
-function spark(el){
+function checkPass(){
 
-for(let i=0;i<15;i++){
+const p=document.getElementById("pass").value;
 
-const s=document.createElement("div");
-s.className="sparkle";
+if(p===secret){
 
-s.style.left=Math.random()*100+"%";
-s.style.top=Math.random()*100+"%";
+hideAll();
+document.getElementById("startPage").style.display="flex";
 
-el.appendChild(s);
+}else{
 
-setTimeout(()=>s.remove(),2000);
+document.getElementById("passMsg").innerHTML="❌ Wrong Password!";
 }
 }
 
-/* NO SHRINK */
+/* TIMER */
+const startDate=new Date("2026-01-21"); // CHANGE DATE ❤️
+
+function updateTimer(){
+
+const now=new Date();
+const diff=now-startDate;
+
+const days=Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("timer").innerHTML=
+"💞 Together for "+days+" Days 💞";
+}
+
+setInterval(updateTimer,1000);
+updateTimer();
+
+/* GAME */
+function goGame(){hideAll();gamePage.style.display="flex";}
+
+function rightAns(){
+gameMsg.innerHTML="😍 Correct!";
+setTimeout(()=>{hideAll();proposal.style.display="flex";},1200);
+}
+
+function wrongAns(){gameMsg.innerHTML="😅 Try Again!";}
+
+/* NO */
 let noSize=20;
 
 function shrinkNo(){
 noSize-=3;
-if(noSize<=5){
-document.getElementById("noBtn").style.display="none";
-}
-document.getElementById("noBtn").style.fontSize=noSize+"px";
-}
-
-/* GO ROSE */
-function goRose(){
-
-spark(document.getElementById("proposal"));
-
-document.getElementById("proposal").style.display="none";
-document.getElementById("rosePage").style.display="flex";
+if(noSize<=5)proposal.querySelectorAll(".btn")[1].style.display="none";
 }
 
 /* ROSE */
-let roseDone=false;
+function goRose(){hideAll();rosePage.style.display="flex";}
 
 function pickRose(n){
 
-if(roseDone) return;
-
-const roses=document.querySelectorAll(".rose");
-
-roses[n-1].classList.add("open");
-
-spark(document.getElementById("rosePage"));
-
 if(n===2){
 
-document.getElementById("roseMsg").innerHTML=
-"💍 Yeahhh! We Will Get Married 😍❤️";
+roseMsg.innerHTML="💍 We Will Get Married 😍";
 
-roseDone=true;
+setTimeout(()=>{hideAll();messagePage.style.display="flex";},1500);
 
-setTimeout(()=>{
-document.getElementById("rosePage").style.display="none";
-document.getElementById("messagePage").style.display="flex";
-},2200);
-
-}else{
-
-document.getElementById("roseMsg").innerHTML=
-"😅 Try Again My Love 🌹";
-
-}
+}else roseMsg.innerHTML="😅 Try Again!";
 }
 
 /* LETTER */
 function openLetter(){
 
-spark(document.getElementById("messagePage"));
-
-document.getElementById("messagePage").style.display="none";
-document.getElementById("letterPage").style.display="flex";
-}
-
-function goMain(){
-
-spark(document.getElementById("letterPage"));
-
-document.getElementById("letterPage").style.display="none";
-document.getElementById("main").style.display="block";
-
 document.getElementById("music").play();
 
-startGallery();
-typeWriter();
+hideAll();
+letterPage.style.display="flex";
 }
 
-/* MESSAGE */
-const text=`My Chikudiii 💕,
+/* MAIN */
+function goMain(){
 
-You are my forever,
-my happiness,
-my home ❤️💍
+hideAll();
+main.style.display="block";
 
-I love you endlessly 😘`;
+typeWriter();
+startGallery();
+}
+
+/* HIDE */
+function hideAll(){
+
+document.querySelectorAll(".screen,#main").forEach(el=>{
+el.style.display="none";
+});
+}
+
+/* TYPE */
+const text=`My Chikudiii 💕
+You are my forever ❤️`;
 
 let i=0;
 
-/* TYPE */
 function typeWriter(){
 
 if(i<text.length){
 
-document.getElementById("typing").innerHTML+=text.charAt(i);
+typing.innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,55);
+setTimeout(typeWriter,60);
 }
 }
 
 /* GALLERY */
-
 const gallery=document.getElementById("gallery");
 const imgs=gallery.children;
 
-let angle=0;
-let auto=true;
-let startX=0;
+let angle=0,auto=true,startX=0;
 
 for(let i=0;i<imgs.length;i++){
 imgs[i].style.transform=
@@ -488,7 +434,6 @@ gallery.style.transform=`rotateY(${angle}deg)`;
 }
 
 /* DRAG */
-
 const wrap=document.getElementById("wrap");
 
 wrap.addEventListener("mousedown",startDrag);
@@ -520,15 +465,10 @@ gallery.style.transform=`rotateY(${angle}deg)`;
 startX=x;
 }
 
-function endDrag(){
-
-auto=true;
-
-document.removeEventListener("mousemove",drag);
-document.removeEventListener("touchmove",drag);
-}
+function endDrag(){auto=true;}
 
 </script>
 
 </body>
 </html>
+
