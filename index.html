@@ -239,31 +239,6 @@ class="slider" id="loveSlider">
 
 <p id="typing"></p>
 
-<div class="card" style="margin-top:20px;font-size:18px;line-height:1.7;">
-
-My Pyari Chikudiii ❤️,
-
-Tame mari smile chho,
-mari khushi chho,
-ane mari duniya chho.
-
-Jare pan hu tane jovu,
-maru dil shant thai jaye chhe.
-Tame mara jivan no
-sab thi sundar hissa chho.
-
-Hu hamesha tane prem karto rahish,
-taro sath kyarey nahi chhodish,
-har situation ma tari sathe rahish.
-
-Tame mari forever chho,
-mari soulmate chho,
-ane mari badhi jindagi chho 💍💖
-
-– Taro Sanskar 😘
-
-</div>
-
 <footer>I Love You Forever 😘❤️</footer>
 
 </div>
@@ -284,7 +259,6 @@ const photos=[
 function startRain(){
 
 const rain=document.getElementById("photoRain");
-
 rain.style.display="block";
 
 if(rainInterval) return;
@@ -297,15 +271,11 @@ function createRain(){
 const rain=document.getElementById("photoRain");
 
 const img=document.createElement("img");
-
 img.className="rainPhoto";
 
 img.src=photos[Math.floor(Math.random()*photos.length)];
-
 img.style.left=Math.random()*100+"vw";
-
 img.style.width=120+Math.random()*60+"px";
-
 img.style.animationDuration=6+Math.random()*5+"s";
 
 rain.appendChild(img);
@@ -445,9 +415,25 @@ el.style.display="none";
 });
 }
 
-/* MAIN TYPING */
-const text=`My Chikudiii 💕
-You are my forever ❤️`;
+/* MAIN TYPING (Final Page - Gujarati Feel in English) */
+const text=`
+My Pyari Chikudiii ❤️,
+
+Tame mari khushi chho,
+tame mari duniya chho,
+ane mari smile chho.
+
+Jare pan hu tane jovu,
+maru dil shant thai jaye chhe.
+Tame mara jivan no
+sab thi sundar hissa chho.
+
+Hu hamesha tane prem karto rahish,
+taro sath kyarey nahi chhodish,
+ane tari sathe jivish.
+
+Tame mari forever chho 💍💖
+`;
 
 let i=0;
 
@@ -461,28 +447,28 @@ setTimeout(typeWriter,70);
 }
 }
 
-/* LETTER TYPING */
+/* LETTER TYPING (English Love Letter) */
 const letterMessage = `
-My Pyari Chikudiii ❤️,
+My Dearest Chikudiii ❤️,
 
-Tame mari smile chho,
-mari khushi chho,
-ane mari duniya chho.
+From the first day you came into my life,
+everything changed beautifully.
+You became my smile, my peace,
+and my biggest blessing.
 
-Jare pan hu tane jovu,
-maru dil shant thai jaye chhe.
-Tame mara jivan no
-sab thi sundar hissa chho.
+With you, every little moment feels special.
+Your laughter makes my world brighter,
+your presence makes my heart calm.
 
-Hu hamesha tane prem karto rahish,
-taro sath kyarey nahi chhodish,
-har situation ma tari sathe rahish.
+I promise to love you forever,
+to respect you,
+and to stand by your side in every situation.
 
-Tame mari forever chho,
-mari soulmate chho,
-ane mari badhi jindagi chho 💍💖
+No matter where life takes us,
+I will always choose you.
 
-– Taro Sanskar 😘
+Forever Yours,
+Sanskar ❤️
 `;
 
 let letterIndex=0;
